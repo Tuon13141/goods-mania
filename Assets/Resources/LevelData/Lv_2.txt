@@ -1,0 +1,554 @@
+{
+    "orderDatas": [
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "0"
+                },
+                {
+                    "itemId": "0"
+                },
+                {
+                    "itemId": "0"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "3"
+                },
+                {
+                    "itemId": "3"
+                },
+                {
+                    "itemId": "3"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "1"
+                },
+                {
+                    "itemId": "1"
+                },
+                {
+                    "itemId": "1"
+                },
+                {
+                    "itemId": "4"
+                },
+                {
+                    "itemId": "4"
+                },
+                {
+                    "itemId": "4"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "2"
+                },
+                {
+                    "itemId": "2"
+                },
+                {
+                    "itemId": "2"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "2"
+                },
+                {
+                    "itemId": "2"
+                },
+                {
+                    "itemId": "2"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "0"
+                },
+                {
+                    "itemId": "0"
+                },
+                {
+                    "itemId": "0"
+                },
+                {
+                    "itemId": "1"
+                },
+                {
+                    "itemId": "1"
+                },
+                {
+                    "itemId": "1"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "3"
+                },
+                {
+                    "itemId": "3"
+                },
+                {
+                    "itemId": "3"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "4"
+                },
+                {
+                    "itemId": "4"
+                },
+                {
+                    "itemId": "4"
+                },
+                {
+                    "itemId": "3"
+                },
+                {
+                    "itemId": "3"
+                },
+                {
+                    "itemId": "3"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "4"
+                },
+                {
+                    "itemId": "4"
+                },
+                {
+                    "itemId": "4"
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
+                {
+                    "itemId": "0"
+                },
+                {
+                    "itemId": "0"
+                },
+                {
+                    "itemId": "0"
+                },
+                {
+                    "itemId": "3"
+                },
+                {
+                    "itemId": "3"
+                },
+                {
+                    "itemId": "3"
+                }
+            ]
+        }
+    ],
+    "shelfDatas": [
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "0"
+                        },
+                        {
+                            "itemId": "1"
+                        },
+                        {
+                            "itemId": "2"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "4"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "0"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "3"
+                        },
+                        {
+                            "itemId": "4"
+                        },
+                        {
+                            "itemId": "0"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 0.0,
+                "y": 1.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "0"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "4"
+                        },
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 0.0,
+                "y": 2.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "2"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 0.0,
+                "y": 3.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "1"
+                        },
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 0.0,
+                "y": 4.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "3"
+                        },
+                        {
+                            "itemId": "4"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 0.0,
+                "y": 5.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "2"
+                        },
+                        {
+                            "itemId": "4"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 1.5,
+                "y": 0.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "2"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 1.5,
+                "y": 1.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "1"
+                        },
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 1.5,
+                "y": 2.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "4"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "0"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 1.5,
+                "y": 3.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "4"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 1.5,
+                "y": 4.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "0"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 1.5,
+                "y": 5.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "1"
+                        },
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "0"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 3.0,
+                "y": 0.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "1"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 3.0,
+                "y": 1.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "0"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "4"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "3"
+                        },
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 3.0,
+                "y": 2.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "2"
+                        },
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 3.0,
+                "y": 3.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "0"
+                        },
+                        {
+                            "itemId": "1"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 3.0,
+                "y": 4.0
+            }
+        },
+        {
+            "rowDatas": [
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "2"
+                        },
+                        {
+                            "itemId": "3"
+                        }
+                    ]
+                },
+                {
+                    "itemDatas": [
+                        {
+                            "itemId": "4"
+                        }
+                    ]
+                }
+            ],
+            "spawnPosition": {
+                "x": 3.0,
+                "y": 5.0
+            }
+        }
+    ]
+}

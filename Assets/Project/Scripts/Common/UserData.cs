@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 public class UserData
 {
     public List<int> collectionProcess;
+    public int currentLevel = 0;
 
     public int GetCollectionProcess(int index) //index start 0
     {

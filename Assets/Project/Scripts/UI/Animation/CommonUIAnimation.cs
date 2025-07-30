@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class CommonUIAnimation
+public static class CommonUIAnimation 
 {
     private static Dictionary<RectTransform, Sequence> _activeBreathingAnimations = new Dictionary<RectTransform, Sequence>();
 

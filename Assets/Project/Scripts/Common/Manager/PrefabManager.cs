@@ -7,10 +7,26 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PrefabManager", menuName = "ScriptableObjects/PrefabManager", order = 1)]
 public class PrefabManager : ScriptableObject
 {
-    [Header("UI")]
-    [SerializeField] GameObject m_PrefabTemp;
+    [SerializeField, PoolingObject] ShelfElement m_ShelfElement;
+    [SerializeField, PoolingObject] ItemElement m_ItemElement;
+    [SerializeField, PoolingObject] SlotElement m_SlotElement;
+    public List<object> GetAllSerializeField()
+    {
+        Type type = this.GetType();
 
-    public GameObject PrefabsTemp => m_PrefabTemp;
+        FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+        var serializedFields = new List<object>();
 
+        foreach (FieldInfo field in fields)
+        {
+            if (Attribute.IsDefined(field, typeof(PoolingObjectAttribute)))
+            {
+                object value = field.GetValue(this);
+                serializedFields.Add(value);
+            }
+        }
+
+        return serializedFields;
+    }
 }
 

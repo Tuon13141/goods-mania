@@ -7,11 +7,8 @@ public class DraggableObject : MonoBehaviour
     public Action OnDragEvent;
     public Action OnDropEvent;
 
-    private Vector3 _initialPosition;
     private Vector3 _offset;
     private bool _isBeingDragged = false;
-
-    private void Start() => _initialPosition = transform.position;
 
     public void OnTouch(Vector3 touchWorldPos)
     {
@@ -42,6 +39,4 @@ public class DraggableObject : MonoBehaviour
         _isBeingDragged = false;
         OnDropEvent?.Invoke();
     }
-
-    public void ResetPosition() => transform.position = _initialPosition;
 }

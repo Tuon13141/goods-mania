@@ -5,15 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelConfig", menuName = "ScriptableObjects/LevelConfig", order = 0)]
 public class LevelConfig : ScriptableObject
 {
-    //[SerializeField] LevelBase[] m_LevelBases;
+    [SerializeField] List<TextAsset> m_LevelDataFiles = new List<TextAsset>();
+    [SerializeField] List<LevelData> m_LevelTestDataFiles = new List<LevelData>();
 
-    //public LevelBase[] levelBases => m_LevelBases;
+    public TextAsset GetLevel(int index)
+    {
+        return index >= 0 && index < m_LevelDataFiles.Count ? m_LevelDataFiles[index] : null;
+    }
 
-    //public LevelBase GetLevelData(int index)
-    //{
-    //    if (levelBases.Length == 0) return null;
+    public LevelData GetLevelTest(int index)
+    {
+        return index >= 0 && index < m_LevelTestDataFiles.Count ? m_LevelTestDataFiles[index] : null;
+    }
 
-    //    int indexLevel = (index) % (levelBases.Length);
-    //    return levelBases[indexLevel];
-    //}
+    public int GetTotalLevel()
+    {
+        return m_LevelDataFiles.Count;
+    }
 }
