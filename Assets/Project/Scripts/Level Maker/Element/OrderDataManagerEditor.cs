@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using NaughtyAttributes;
+using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(OrderDataManager))]
@@ -28,6 +29,18 @@ public class OrderDataManagerEditor : Editor
         {
             manager.orderDataElements.Add(new OrderDataElement());
             UpdateShowArray();
+        }
+
+
+        GUI.backgroundColor = Color.red;
+        if (GUILayout.Button("Delete All Orders"))
+        {
+            if (EditorUtility.DisplayDialog("Delete All Orders",
+                "Are you sure you want to delete all orders?", "Yes", "Cancel"))
+            {
+                manager.orderDataElements.Clear();
+                UpdateShowArray();
+            }
         }
 
         // Vẽ từng OrderDataElement

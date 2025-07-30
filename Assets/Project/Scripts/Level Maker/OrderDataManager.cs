@@ -11,6 +11,12 @@ public class OrderDataManager : MonoBehaviour
     public List<GameObject> items = new List<GameObject>();
     [Header("Order")]
     public List<OrderDataElement> orderDataElements = new List<OrderDataElement>();
+
+    [Button("Delete All Order")]
+    public void DeleteAllOrder()
+    {
+        orderDataElements.Clear();
+    }
 }
 
 [System.Serializable]

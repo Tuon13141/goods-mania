@@ -95,8 +95,7 @@ public class LevelDataController : Singleton<LevelDataController>
         DestroyImmediate(shelf.gameObject);
     }
 
-    [Button("Create Level Data File")]  
-    public void CreateLevelDataFile()
+    public void CreateLevelDataFile(string levelName)
     {
         //CHUYỂN SANG JSON VÀ LƯU VÀO FILE Resources/LevelData/Lv_n.txt
         LevelData levelData = new LevelData();
@@ -162,7 +161,7 @@ public class LevelDataController : Singleton<LevelDataController>
         }
 
         // Save to file
-        string filePath = Path.Combine(directoryPath, "Lv_1.txt");
+        string filePath = Path.Combine(directoryPath, levelName + ".txt");
         File.WriteAllText(filePath, jsonData);
 
         Debug.Log("Level data saved to: " + filePath);
@@ -171,4 +170,104 @@ public class LevelDataController : Singleton<LevelDataController>
         UnityEditor.AssetDatabase.Refresh();
 #endif
     }
+
+    public void LoadLevelFromTextAsset(TextAsset ts)
+    {
+        if (ts == null)
+        {
+            Debug.LogError("Level text asset is null.");
+            return;
+        }
+
+        string json = ts.text;
+        if (string.IsNullOrEmpty(json))
+        {
+            Debug.LogError("Level data is empty.");
+            return;
+        }
+
+        LevelData levelData = JsonUtility.FromJson<LevelData>(json);
+        if (levelData == null)
+        {
+            Debug.LogError("Failed to parse level data.");
+            return;
+        }
+
+        // Clear current level
+        DeleteAllShelfs();
+        OrderDataManager.orderDataElements.Clear();
+
+        // Rebuild Orders
+        foreach (var order in levelData.orderDatas)
+        {
+            OrderDataElement orderElement = new OrderDataElement();
+            foreach (var item in order.orderItemDatas)
+            {
+                var selection = new OrderDataElement.ItemSelection();
+
+                // Tìm itemIndex dựa trên itemId
+                int itemIndex = OrderDataManager.items.FindIndex(x =>
+                {
+                    var itemData = x.GetComponent<ItemDataElement>();
+                    return itemData != null && itemData.ItemId == item.itemId;
+                });
+
+                if (itemIndex != -1)
+                {
+                    selection.itemId = item.itemId;
+                    selection.itemIndex = itemIndex;
+                    orderElement.itemSelections.Add(selection);
+                }
+            }
+
+            OrderDataManager.orderDataElements.Add(orderElement);
+        }
+
+        // Rebuild Shelfs
+        foreach (var shelfData in levelData.shelfDatas)
+        {
+            ShelfDataElement shelf = Instantiate(m_ShelfDataElementPrefab, m_ShelfHolder);
+            shelf.transform.localPosition = new Vector3(shelfData.spawnPosition.x, shelfData.spawnPosition.y, 0f);
+            shelf.name = "ShelfDataElement_" + shelfs.Count;
+            shelfs.Add(shelf);
+
+            foreach (var rowData in shelfData.rowDatas)
+            {
+                RowDataElement row = Instantiate(shelf.RowDataElementPrefab, shelf.transform);
+                row.transform.SetParent(shelf.Holder); 
+                row.transform.localPosition = shelf.StartRowPosition.localPosition +
+                                              new Vector3(0, 0, shelf.RowSpacing * shelf.rowDataElements.Count);
+
+                row.name = "RowDataElement_" + shelf.rowDataElements.Count;
+                row.SetShelfDataElement(shelf);
+                row.SetUp();
+
+                // Spawn items theo từng slot
+                for (int i = 0; i < rowData.itemDatas.Count; i++)
+                {
+                    string itemId = rowData.itemDatas[i].itemId;
+
+                    GameObject prefab = OrderDataManager.items.Find(x =>
+                    {
+                        var itemData = x.GetComponent<ItemDataElement>();
+                        return itemData != null && itemData.ItemId == itemId;
+                    });
+
+                    if (prefab != null)
+                    {
+                        row.OnAddToSlot(prefab, i + 1);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Item with id {itemId} not found in item list.");
+                    }
+                }
+
+                shelf.rowDataElements.Add(row);
+            }
+        }
+
+        Debug.Log("Level loaded from " + ts.name);
+    }
+
 }

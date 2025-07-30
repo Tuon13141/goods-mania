@@ -9,9 +9,13 @@ public class ShelfDataElement : MonoBehaviour
     public List<RowDataElement> rowDataElements = new List<RowDataElement>();
 
     [SerializeField, ShowIf("AlwaysFalse")] Transform m_Holder;
+    public Transform Holder => m_Holder;    
     [SerializeField, ShowIf("AlwaysFalse")] Transform m_StartRowPosition;
+    public Transform StartRowPosition => m_StartRowPosition;
     [SerializeField, ShowIf("AlwaysFalse")] float m_RowSpacing;
+    public float RowSpacing => m_RowSpacing;
     [SerializeField, ShowIf("AlwaysFalse")] RowDataElement m_RowDataElementPrefab;
+    public RowDataElement RowDataElementPrefab => m_RowDataElementPrefab;
     private bool AlwaysFalse() => false;
 
     [Button("Spawn Rows")]

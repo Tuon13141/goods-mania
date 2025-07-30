@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 8700443077350648791, guid: df76bb5f44d33854b959ee7bb1e38aa6, type: 3}
   - {fileID: 8700443077350648791, guid: fc8710efbc6458846b356647aa07a809, type: 3}
   - {fileID: 8700443077350648791, guid: 0b4cd323487c7c84c92012caf302c853, type: 3}
+  orderDataElements: []
 --- !u!1 &2644889144149694134
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4469631939693921284}
   - component: {fileID: 6328802095782012581}
+  - component: {fileID: 4902135399021610708}
   m_Layer: 0
   m_Name: LevelDataController
   m_TagString: Untagged
@@ -131,5 +133,18 @@ MonoBehaviour:
   m_ShelfDataElementPrefab: {fileID: 4502767883451150437, guid: 328116f0ce8900c4ab256df5c7dfe769, type: 3}
   m_ShelfHolder: {fileID: 8506286350600268585}
   shelfs: []
-  m_SpawnPosition: {x: 0, y: 2, z: 0}
+  m_SpawnPosition: {x: 0.2, y: 3, z: 0}
   m_ShelfAtIndex: 1
+--- !u!114 &4902135399021610708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3643950043997638067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a693d70b5211b14db12c1e600fad21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_levelDataTextAsset: {fileID: 0}
