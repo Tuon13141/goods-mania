@@ -10,9 +10,7 @@ public static class CommonTransformCalculator
 
         if (totalSlot <= 1)
         {
-            positions.Add(startPoint.position);
-
-            return (startPoint.position, 0);
+            return ((startPoint.position + endPoint.position) / 2, 0);
         }
 
         Vector3 start = startPoint.position;
@@ -45,9 +43,7 @@ public static class CommonTransformCalculator
 
         if (totalSlot <= 1)
         {
-            positions.Add(startPoint.position);
-           
-            return (startPoint.position, 0);
+            return ((startPoint.position + endPoint.position) / 2, 0);
         }
 
         Vector3 start = startPoint.position;

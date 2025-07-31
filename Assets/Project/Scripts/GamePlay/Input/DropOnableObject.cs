@@ -11,19 +11,19 @@ public class DropOnableObject : MonoBehaviour
 
     public void OnDragEnter(DraggableObject draggable)
     {
-        Debug.Log($"Object {draggable.name} entered shelf {name}");
+        //Debug.Log($"Object {draggable.name} entered shelf {name}");
         OnDragEnterEvent?.Invoke(draggable);
     }
 
     public void OnDragExit(DraggableObject draggable)
     {
-        Debug.Log($"Object {draggable.name} exited shelf {name}");
+        //Debug.Log($"Object {draggable.name} exited shelf {name}");
         OnDragExitEvent?.Invoke(draggable);
     }
 
     public void OnDrop(DraggableObject draggable)
     {
-        Debug.Log($"Object {draggable.name} dropped on shelf {name}");
+        //Debug.Log($"Object {draggable.name} dropped on shelf {name}");
         OnDropEvent?.Invoke(draggable); 
         //draggable.transform.SetParent(transform);
     }

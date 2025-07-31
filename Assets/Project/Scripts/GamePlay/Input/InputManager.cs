@@ -142,19 +142,16 @@ public class InputManager : MonoBehaviour
     {
         if (_currentDraggedObject != null)
         {
-            _currentDraggedObject.OnDrop();
+            if (_currentHoveredObject != null)
+            {
+                _currentHoveredObject.OnDragExit(_currentDraggedObject);
+                _currentHoveredObject = null;
+            }
+            else 
+            {
+                _currentDraggedObject.OnDropedFail();
+            }
         }
-
-        if (_currentHoveredObject != null)
-        {
-            _currentHoveredObject.OnDragExit(_currentDraggedObject);
-            _currentHoveredObject = null;
-        }
-        else if (_currentDraggedObject != null)
-        {
-            _currentDraggedObject.OnDropedFail();
-        }
-
 
         _currentDraggedObject = null;
         _isDragging = false;

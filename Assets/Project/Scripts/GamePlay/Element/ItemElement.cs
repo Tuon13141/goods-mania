@@ -9,9 +9,11 @@ public class ItemElement : MonoBehaviour
     [SerializeField] DraggableObject m_DraggableObject;
 
     ItemData _itemData;
+    public string itemId => _itemData?.itemId ?? string.Empty;
 
     ItemDataElement _itemDataElement;
     ShelfElement _shelfElement;
+    public ShelfElement ShelfElement => _shelfElement;
 
     public bool isLocked = true; 
 
@@ -32,6 +34,7 @@ public class ItemElement : MonoBehaviour
         _itemDataElement = ItemPoolingManager.instance.GetItem(itemData.itemId);
         _itemDataElement.transform.SetParent(m_Holder);
         _itemDataElement.transform.localPosition = Vector3.zero;
+        _itemDataElement.transform.localScale = Vector3.one;
 
         _itemDataElement.gameObject.name = "ItemDataElement_" + itemData.itemId;
 
@@ -86,6 +89,7 @@ public class ItemElement : MonoBehaviour
         TweenManager.tweens.Add(transform.DOMove(_shelfElement.GetItemPosition(this).position , 0.25f).OnComplete(() =>
         {
             Debug.Log(gameObject.name + " drop failed, returning to original position.");
+            OnDrop();
         }));
     }
     public void OnReset()

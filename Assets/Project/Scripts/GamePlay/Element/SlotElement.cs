@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class SlotElement : MonoBehaviour
 {
+    [SerializeField] Transform m_Holder;
+
     public void SetUp()
-    {
-
-    }
-
-    public void OnReset()
     {
 
     }

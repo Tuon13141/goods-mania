@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
         _canScale = false;
     }
 
-    public void FitChildrenToBottomPartOfCamera(GameObject parent, float heightRatio = 0.6f, float widthRatio = 0.8f)
+    public void FitChildrenToBottomPartOfCamera(GameObject parent, float heightRatio = 0.65f, float widthRatio = 0.8f)
     {
         Camera camera = Camera.main;
         if (parent == null || camera == null)
@@ -77,7 +77,7 @@ public class CameraController : MonoBehaviour
 
         Vector3 camPos = camera.transform.position;
 
-        float centerY = 2;
+        float centerY = 3;
 
         Vector3 targetCenter = new Vector3(0, centerY, 0);
 

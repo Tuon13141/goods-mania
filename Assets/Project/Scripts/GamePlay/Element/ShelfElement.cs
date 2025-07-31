@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -103,7 +104,7 @@ public class ShelfElement : MonoBehaviour
         foreach (var key in _itemElementByPosition.Keys)
         {
             //Debug.Log("Checking position: " + key.position + " for item: " + itemElement.gameObject.name);
-            if (_itemElementByPosition[key] == null)
+            if (_itemElementByPosition[key] == null || _itemElementByPosition[key] == itemElement)
             {
                 check = true;
                 float distance = Vector3.Distance(itemElement.transform.position, key.position);
@@ -122,10 +123,16 @@ public class ShelfElement : MonoBehaviour
             return;
         }
 
+        draggable.OnDropedOn(m_DropOnableObject);
+
         Debug.Log("Nearest empty position found at: " + nearestEmptyPosition);
         itemElement.transform.SetParent(m_ItemHolder);
-        TweenManager.tweens.Add(itemElement.transform.DOMove(nearestEmptyPosition.position, 0.25f)
-            .SetEase(Ease.OutQuad));
+        TweenManager.tweens.Add(itemElement.transform.DOMove(nearestEmptyPosition.position, 0.05f)
+            .SetEase(Ease.OutQuad).OnComplete(() =>
+                                                    {
+                                                        draggable.OnDrop();
+                                                        CheckMergeCondition();
+                                                    })); 
 
         _itemElementByPosition[nearestEmptyPosition] = itemElement;
 
@@ -135,8 +142,6 @@ public class ShelfElement : MonoBehaviour
         }
 
         _allItemElements.Add(itemElement);
-
-        draggable.OnDropedOn(m_DropOnableObject);
     }
 
 
@@ -171,6 +176,18 @@ public class ShelfElement : MonoBehaviour
         return null;
     }
 
+    public void CheckMergeCondition()
+    {
+        if (_itemElementByPosition.Values.Any(value => value == null)) return;
+
+        string itemId = _itemElementByPosition.Values.ElementAt(0).itemId;
+        bool allSame = _itemElementByPosition.Values.All(item => item != null && item.itemId == itemId);
+
+        if (allSame)
+        {
+            Debug.Log("Merge");
+        }
+    }
     public void OnReset()
     {
         rowDatas.Clear();
