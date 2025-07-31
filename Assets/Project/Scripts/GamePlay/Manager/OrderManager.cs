@@ -14,4 +14,9 @@ public class OrderManager : MonoBehaviour
         
         //LevelController.instance.cameraController.FitChildrenToBottomPartOfCamera(gameObject);
     }
+
+    public void OnReset()
+    {
+
+    }
 }

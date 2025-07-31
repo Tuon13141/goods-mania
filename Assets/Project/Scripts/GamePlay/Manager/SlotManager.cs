@@ -43,4 +43,9 @@ public class SlotManager : MonoBehaviour
     {
         
     }
+
+    public void OnReset()
+    {
+
+    }
 }

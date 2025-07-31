@@ -4,8 +4,10 @@ using System;
 public class DraggableObject : MonoBehaviour
 {
     public Action OnTouchEvent;
-    public Action OnDragEvent;
+    public Action<Vector3> OnDragEvent;
     public Action OnDropEvent;
+    public Action<DropOnableObject> OnDropedOnEvent;
+    public Action OnDropedFailEvent;
 
     private Vector3 _offset;
     private bool _isBeingDragged = false;
@@ -30,13 +32,22 @@ public class DraggableObject : MonoBehaviour
             transform.position.z 
         );
 
-        transform.position = targetPos;
-        OnDragEvent?.Invoke();
+        OnDragEvent?.Invoke(targetPos);
     }
 
     public void OnDrop()
     {
         _isBeingDragged = false;
         OnDropEvent?.Invoke();
+    }
+
+    public void OnDropedOn(DropOnableObject dropOnableObject)
+    {
+        OnDropedOnEvent?.Invoke(dropOnableObject);
+    }
+
+    public void OnDropedFail()
+    {
+        OnDropedFailEvent?.Invoke();
     }
 }

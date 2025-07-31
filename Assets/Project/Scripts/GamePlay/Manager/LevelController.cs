@@ -43,6 +43,13 @@ public class LevelController : Singleton<LevelController>
 
     public void OnReset()
     {
+        TweenManager.OnReset();
 
+        shelfManager.OnReset();
+        slotManager.OnReset();
+        orderManager.OnReset();
+        inputManager.OnReset();
+        cameraController.OnReset();
+   
     }
 }

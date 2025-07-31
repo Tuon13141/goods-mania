@@ -8,4 +8,9 @@ public class SlotElement : MonoBehaviour
     {
 
     }
+
+    public void OnReset()
+    {
+
+    }
 }
