@@ -4,23 +4,11 @@
             "orderItemDatas": [
                 {
                     "itemId": "0"
-                },
-                {
-                    "itemId": "0"
-                },
-                {
-                    "itemId": "0"
                 }
             ]
         },
         {
             "orderItemDatas": [
-                {
-                    "itemId": "3"
-                },
-                {
-                    "itemId": "3"
-                },
                 {
                     "itemId": "3"
                 }
@@ -32,30 +20,12 @@
                     "itemId": "1"
                 },
                 {
-                    "itemId": "1"
-                },
-                {
-                    "itemId": "1"
-                },
-                {
-                    "itemId": "4"
-                },
-                {
-                    "itemId": "4"
-                },
-                {
                     "itemId": "4"
                 }
             ]
         },
         {
             "orderItemDatas": [
-                {
-                    "itemId": "2"
-                },
-                {
-                    "itemId": "2"
-                },
                 {
                     "itemId": "2"
                 }
@@ -65,12 +35,6 @@
             "orderItemDatas": [
                 {
                     "itemId": "2"
-                },
-                {
-                    "itemId": "2"
-                },
-                {
-                    "itemId": "2"
                 }
             ]
         },
@@ -78,18 +42,6 @@
             "orderItemDatas": [
                 {
                     "itemId": "0"
-                },
-                {
-                    "itemId": "0"
-                },
-                {
-                    "itemId": "0"
-                },
-                {
-                    "itemId": "1"
-                },
-                {
-                    "itemId": "1"
                 },
                 {
                     "itemId": "1"
@@ -100,9 +52,13 @@
             "orderItemDatas": [
                 {
                     "itemId": "3"
-                },
+                }
+            ]
+        },
+        {
+            "orderItemDatas": [
                 {
-                    "itemId": "3"
+                    "itemId": "4"
                 },
                 {
                     "itemId": "3"
@@ -113,34 +69,6 @@
             "orderItemDatas": [
                 {
                     "itemId": "4"
-                },
-                {
-                    "itemId": "4"
-                },
-                {
-                    "itemId": "4"
-                },
-                {
-                    "itemId": "3"
-                },
-                {
-                    "itemId": "3"
-                },
-                {
-                    "itemId": "3"
-                }
-            ]
-        },
-        {
-            "orderItemDatas": [
-                {
-                    "itemId": "4"
-                },
-                {
-                    "itemId": "4"
-                },
-                {
-                    "itemId": "4"
                 }
             ]
         },
@@ -148,18 +76,6 @@
             "orderItemDatas": [
                 {
                     "itemId": "0"
-                },
-                {
-                    "itemId": "0"
-                },
-                {
-                    "itemId": "0"
-                },
-                {
-                    "itemId": "3"
-                },
-                {
-                    "itemId": "3"
                 },
                 {
                     "itemId": "3"

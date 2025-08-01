@@ -16,6 +16,7 @@ public class ShelfElement : MonoBehaviour
     List<ItemElement> _row_1_Items = new List<ItemElement>();
     List<ItemElement> _row_2_Items = new List<ItemElement>();
 
+    int _currentRowIndex = 0;
 
     [Header("Row Position List")]
     [SerializeField] List<Transform> m_Row_1_Positions = new List<Transform>();
@@ -48,33 +49,42 @@ public class ShelfElement : MonoBehaviour
         for (int i = 0; i < Mathf.Min(2, shelfData.rowDatas.Count); i++)
         {
             var itemList = shelfData.rowDatas[i].itemDatas;
-            for (int j = 0; j < itemList.Count; j++)
-            {
-                ItemData itemData = itemList[j];
-                if (itemData == null) continue;
+            CreateItemElement(itemList, i);
 
-                ItemElement itemElement = PoolingManager.instance.Get(typeof(ItemElement)) as ItemElement;
-                itemElement.transform.SetParent(m_ItemHolder);
-                itemElement.SetUp(itemData, this);
-
-                if(i == 0)
-                {
-                    itemElement.transform.position = m_Row_1_Positions[j].position;
-                    _itemElementByPosition[m_Row_1_Positions[j]] = itemElement;
-                    _row_1_Items.Add(itemElement);
-
-                    itemElement.isLocked = false;
-                }
-                else
-                {
-                    itemElement.transform.position = m_Row_2_Positions[j].position;
-                    _row_2_Items.Add(itemElement);
-                }
-
-                _allItemElements.Add(itemElement);
-             
-            }
+            _currentRowIndex++;
         }
+    }
+
+    void CreateItemElement(List<ItemData> itemList, int i = 0)
+    {
+        for (int j = 0; j < itemList.Count; j++)
+        {
+            ItemData itemData = itemList[j];
+            if (itemData == null) continue;
+
+            ItemElement itemElement = PoolingManager.instance.Get(typeof(ItemElement)) as ItemElement;
+            itemElement.transform.SetParent(m_ItemHolder);
+            itemElement.transform.localScale = Vector3.one;
+            itemElement.SetUp(itemData, this);
+
+            if (i == 0)
+            {
+                itemElement.transform.position = m_Row_1_Positions[j].position;
+                _itemElementByPosition[m_Row_1_Positions[j]] = itemElement;
+                _row_1_Items.Add(itemElement);
+
+                itemElement.isLocked = false;
+            }
+            else
+            {
+                itemElement.transform.position = m_Row_2_Positions[j].position;
+                _row_2_Items.Add(itemElement);
+            }
+
+            _allItemElements.Add(itemElement);
+
+        }
+
     }
 
     public void OnDragEnter(DraggableObject draggable)
@@ -118,14 +128,14 @@ public class ShelfElement : MonoBehaviour
 
         if(!check)
         {
-            Debug.LogWarning("No empty position found for item: " + itemElement.gameObject.name);
+            //Debug.LogWarning("No empty position found for item: " + itemElement.gameObject.name);
             draggable.OnDropedFail();
             return;
         }
 
         draggable.OnDropedOn(m_DropOnableObject);
 
-        Debug.Log("Nearest empty position found at: " + nearestEmptyPosition);
+        //Debug.Log("Nearest empty position found at: " + nearestEmptyPosition);
         itemElement.transform.SetParent(m_ItemHolder);
         TweenManager.tweens.Add(itemElement.transform.DOMove(nearestEmptyPosition.position, 0.05f)
             .SetEase(Ease.OutQuad).OnComplete(() =>
@@ -162,6 +172,11 @@ public class ShelfElement : MonoBehaviour
         }
 
         _allItemElements.Remove(itemElement);
+
+        if(_row_1_Items.Count <= 0)
+        {
+            Resort();
+        }
     }
 
     public Transform GetItemPosition(ItemElement itemElement)
@@ -185,7 +200,49 @@ public class ShelfElement : MonoBehaviour
 
         if (allSame)
         {
-            Debug.Log("Merge");
+            Debug.Log("Merge");        
+            ItemMergeElement itemMergeElement = PoolingManager.instance.Get(typeof(ItemMergeElement)) as ItemMergeElement;
+            List<ItemElement> itemsToMerge = _itemElementByPosition.Values.ToList();
+
+            foreach(ItemElement itemElement in itemsToMerge)
+            {
+                itemElement.isLocked = true;
+            }
+
+            itemMergeElement.transform.position = CalculateCenterPosition(itemsToMerge);
+            itemMergeElement.SetUp(itemsToMerge);
+
+
+            LevelController.instance.OnMerge(itemMergeElement);
+
+            Resort();
+        }
+    }
+
+    void Resort()
+    {
+        foreach (var key in _itemElementByPosition.Keys.ToList())
+        {
+            _itemElementByPosition[key] = null;
+        }
+        _row_1_Items.Clear();
+        _row_1_Items.AddRange(_row_2_Items);
+
+        for (int i = 0; i < _row_1_Items.Count; i++)
+        {
+            ItemElement item = _row_1_Items[i];
+            TweenManager.tweens.Add(CommonGameplayAnimation.MoveTo(item.transform, m_Row_1_Positions[i], 0.25f).OnComplete(() => item.isLocked = false));
+            _itemElementByPosition[m_Row_1_Positions[i]] = item;
+            
+        }
+
+        _row_2_Items.Clear();
+
+
+        if (_currentRowIndex < rowDatas.Count)
+        {
+            var itemList = rowDatas[_currentRowIndex].itemDatas;
+            CreateItemElement(itemList, 1);
         }
     }
     public void OnReset()
@@ -202,5 +259,31 @@ public class ShelfElement : MonoBehaviour
         _row_1_Items.Clear();
         _row_2_Items.Clear();
         _allItemElements.Clear();
+
+        _currentRowIndex = 0;
+    }
+
+    public Vector3 CalculateCenterPosition(List<ItemElement> itemsToMerge)
+    {
+        if (itemsToMerge == null || itemsToMerge.Count == 0)
+        {
+            Debug.LogWarning("Danh sách itemsToMerge rỗng hoặc null");
+            return Vector3.zero; 
+        }
+
+        var validItems = itemsToMerge.Where(item => item != null).ToList();
+
+        if (validItems.Count == 0)
+        {
+            Debug.LogWarning("Không có ItemElement hợp lệ trong danh sách");
+            return Vector3.zero;
+        }
+
+        Vector3 sumPositions = validItems.Aggregate(
+            Vector3.zero,
+            (sum, item) => sum + item.transform.position
+        );
+
+        return sumPositions / validItems.Count;
     }
 }

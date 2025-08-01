@@ -43,7 +43,7 @@ public class ItemElement : MonoBehaviour
 
     public void OnTouch()
     {
-        Debug.Log(gameObject.name + " touched.");
+        //Debug.Log(gameObject.name + " touched.");
         if(isLocked) return;
 
         TweenManager.tweens.Add(m_Holder.DOLocalMoveZ(-0.5f, 0.25f));
@@ -88,7 +88,7 @@ public class ItemElement : MonoBehaviour
 
         TweenManager.tweens.Add(transform.DOMove(_shelfElement.GetItemPosition(this).position , 0.25f).OnComplete(() =>
         {
-            Debug.Log(gameObject.name + " drop failed, returning to original position.");
+            //Debug.Log(gameObject.name + " drop failed, returning to original position.");
             OnDrop();
         }));
     }

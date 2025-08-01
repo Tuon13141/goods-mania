@@ -13,6 +13,8 @@ public class LevelController : Singleton<LevelController>
 
     LevelData levelData;
 
+    public GameState gameState = GameState.None;
+
     [Header("Managers")]
 
     [SerializeField] InputManager m_InputManager;
@@ -41,6 +43,23 @@ public class LevelController : Singleton<LevelController>
 
     }
 
+    public bool OnMerge(ItemMergeElement itemMergeElement)
+    {
+        if(gameState != GameState.Playing) return false;
+
+        if(orderManager.AddToOrder(itemMergeElement))
+        {
+            return true;
+        }
+
+        if (slotManager.AddToSlot(itemMergeElement))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public void OnReset()
     {
         TweenManager.OnReset();
@@ -52,4 +71,13 @@ public class LevelController : Singleton<LevelController>
         cameraController.OnReset();
    
     }
+}
+
+public enum GameState
+{
+    None,
+    Playing,
+    Win,
+    Lose,
+    WaitingToLose,
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public static class TweenManager
 {
     public static List<Tween> tweens = new List<Tween>();
+    public static List<Sequence> sequences = new List<Sequence>();
 
     public static void OnReset()
     {
@@ -17,5 +18,14 @@ public static class TweenManager
             }
         }
         tweens.Clear();
+
+        foreach (var sequence in sequences)
+        {
+            if (sequence.IsActive() && !sequence.IsComplete())
+            {
+                sequence.Kill();
+            }
+        }
+        sequences.Clear();
     }
 }

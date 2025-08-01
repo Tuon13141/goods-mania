@@ -13,7 +13,11 @@ public class OrderElement : MonoBehaviour
 
     [SerializeField] SpriteRenderer m_AvaSpriteRenderer;
 
+    public bool isLocked = true;
+
     Dictionary<string, int> _itemDict = new Dictionary<string, int>();
+
+    OrderManager _orderManager;
 
     [Header("Order Display Settings")]
     [SerializeField] Transform m_StartPoint;
@@ -22,9 +26,12 @@ public class OrderElement : MonoBehaviour
     Vector3 _startPos;
     [SerializeField] float m_MaxSpacing = 6f;
     [SerializeField] Transform m_Holder;
+    [SerializeField] Transform m_Center;
+    public Transform Center => m_Center;
 
-    public void SetUp(OrderData data)
+    public void SetUp(OrderData data, OrderManager orderManager)
     {
+        _orderManager = orderManager;
         int avaIndex = Random.Range(0, m_AvaSprites.Count);
         m_AvaSpriteRenderer.sprite = m_AvaSprites[avaIndex];    
 
@@ -34,7 +41,7 @@ public class OrderElement : MonoBehaviour
         {
             if(!_itemDict.ContainsKey(item.itemId)) _itemDict.Add(item.itemId, 0);
             
-            _itemDict[item.itemId]+=3;
+            _itemDict[item.itemId]++;
         }
 
         //Debug.Log("StartPoint " + m_StartPoint.position + " EndPoint " + m_EndPoint.position);
@@ -57,10 +64,45 @@ public class OrderElement : MonoBehaviour
             itemOrderElement.transform.localScale = Vector3.one;
             itemOrderElement.transform.position = _startPos + Vector3.right * _spacing * i;
 
-            itemOrderElement.SetUp(itemData, totalCount);
+            itemOrderElement.SetUp(itemData, totalCount, this);
             _itemOrderElements.Add(itemOrderElement);
         }
     }
+
+    public bool CanAddToOrder(ItemMergeElement itemMergeElement)
+    {
+        if(!isLocked) return false;
+        if (_itemDict.ContainsKey(itemMergeElement.itemId))
+        {
+            if(_itemDict[itemMergeElement.itemId] - 1 < 0) return false;
+
+            _itemDict[itemMergeElement.itemId]--;
+            return true;
+        }
+        return false;
+    }
+
+    public void AddToOrder(ItemMergeElement ItemMergeElement)
+    {
+        _itemDict[ItemMergeElement.itemId]--;
+        ItemOrderElement itemOrderElement = _itemOrderElements.FirstOrDefault(item => item.itemId == ItemMergeElement.itemId);
+        if (itemOrderElement != null)
+        {
+            itemOrderElement.AddToOrder(ItemMergeElement);
+        }
+    }
+
+    public void OnCompletedOrder(ItemOrderElement orderElement)
+    {
+        foreach(int value in _itemDict.Values)
+        {
+            if (value > 0) return;
+        }   
+
+        _orderManager.OnCompletedOrder(this);
+    }
+
+
     public void OnReset()
     {
         _orderData = null;
@@ -74,6 +116,8 @@ public class OrderElement : MonoBehaviour
         }
 
         _itemOrderElements.Clear();
+
+        isLocked = true;
         // Reset any other properties or states if necessary
     }
 }

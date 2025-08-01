@@ -6,7 +6,6 @@ using UnityEngine;
 public class SlotManager : MonoBehaviour
 {
     List<SlotElement> _allSlotElements = new List<SlotElement>();
-    List<SlotElement> _currentSlotElements = new List<SlotElement>();
 
     [SerializeField] Transform m_SlotParent;
 
@@ -35,7 +34,6 @@ public class SlotManager : MonoBehaviour
             slotElement.transform.localScale = Vector3.one;
 
             _allSlotElements.Add(slotElement);
-            _currentSlotElements.Add(slotElement);
         }
     }
 
@@ -44,8 +42,26 @@ public class SlotManager : MonoBehaviour
         
     }
 
+    public bool AddToSlot(ItemMergeElement itemMergeElement)
+    {
+        foreach (var slot in _allSlotElements)
+        {
+            if (slot.CanAddToSlot()) { 
+                //Debug.Log("Add to slot: " + slot.gameObject.name);
+                slot.AddToSlot(itemMergeElement);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void OnReset()
     {
-
+        foreach (var slot in _allSlotElements)
+        {
+            slot.OnReset();
+        }
     }
 }

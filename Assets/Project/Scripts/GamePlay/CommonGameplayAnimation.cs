@@ -1,10 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
+﻿
 using DG.Tweening;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using System.Xml.Linq;
 using UnityEngine;
 
 public static class CommonGameplayAnimation
@@ -87,6 +83,29 @@ public static class CommonGameplayAnimation
         return tween;
     }
 
+    public static Tween ScaleToZeroBouncy(Transform transform, Vector3 maxScale, float duration, Action onFinish = null, Ease ease = Ease.Linear)
+    {
+        Tween tween = transform.DOScale(maxScale, duration / 2)
+        .SetEase(ease)
+        .OnComplete(() =>
+        {
+            transform.DOScale(Vector3.zero, duration / 2).SetEase(ease).OnComplete(() => onFinish?.Invoke());
+        });
+
+        return tween;
+    }
+
+    public static Tween ScaleToOneBouncy(Transform transform, Vector3 maxScale, float duration, Action onFinish = null, Ease ease = Ease.Linear)
+    {
+        Tween tween = transform.DOScale(maxScale, duration / 2)
+        .SetEase(ease)
+        .OnComplete(() =>
+        {
+            transform.DOScale(Vector3.one, duration / 2).SetEase(ease).OnComplete(() => onFinish?.Invoke());
+        });
+
+        return tween;
+    }
 
     public static Tween BlinkingEffect(SpriteRenderer spriteRenderer, Color startColor, Color endColor, float duration)
     {
@@ -136,9 +155,14 @@ public static class CommonGameplayAnimation
         return bounceSequence;
     }
 
-    public static Tween MoveTo(Transform target, Transform holder, float duration)
+    public static Tween MoveTo(Transform target, Transform destination, float duration)
     {
-        return target.DOMove(holder.position, duration).SetEase(Ease.Linear);
+        return target.DOMove(destination.position, duration).SetEase(Ease.Linear);
+    }
+
+    public static Tween MoveTo(Transform target, Vector3 destination, float duration)
+    {
+        return target.DOMove(destination, duration).SetEase(Ease.Linear);
     }
 
     public static Tween MoveFromTo(Transform target, Vector3 startPoint, Vector3 endPoint, float duration,

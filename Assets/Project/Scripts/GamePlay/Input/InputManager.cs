@@ -15,6 +15,11 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         HandleInput();
+
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            UnityEditor.EditorApplication.isPaused = true;
+        }
     }
 
     private void HandleInput()

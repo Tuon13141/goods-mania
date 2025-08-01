@@ -100,11 +100,3 @@ public class GameManager : Singleton<GameManager>
 
   
 }
-
-public enum GameState
-{
-    Playing,
-    Pause,
-    Win,
-    Lose
-}

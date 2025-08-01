@@ -12,6 +12,7 @@ public class PrefabManager : ScriptableObject
     [SerializeField, PoolingObject] SlotElement m_SlotElement;
     [SerializeField, PoolingObject] OrderElement m_OrderElement;
     [SerializeField, PoolingObject] ItemOrderElement m_ItemOrderElement;
+    [SerializeField, PoolingObject] ItemMergeElement m_ItemMergeElement;
     public List<object> GetAllSerializeField()
     {
         Type type = this.GetType();
